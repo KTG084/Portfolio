@@ -1,0 +1,25 @@
+.text-type {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.text-type__cursor {
+  margin-left: 0.25rem;
+  display: inline-block;
+  opacity: 1;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}
+
+
+.text-type--hero {
+  font-weight: 400;        /* bold */
+  color: white;            /* fallback color */
+  font-size: 2.5rem;       /* optional */
+}
+
+.text-type--hero .text-type__content {
+  color: white;
+}
