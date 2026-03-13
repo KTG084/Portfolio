@@ -40,8 +40,18 @@ const navIcons = [
     img: "/icons/mode.svg",
   },
 ];
+
+type WindowKey =
+  | "finder"
+  | "contact"
+  | "resume"
+  | "safari"
+  | "photos"
+  | "terminal"
+  | "txtfile"
+  | "imgfile";
 const Navbar = () => {
-  const { openWindow } = useWindowStore();
+  const { openWindow  } = useWindowStore();
   return (
     <nav>
       <div>
@@ -49,7 +59,7 @@ const Navbar = () => {
         <p className="font-bold">Karan&apos;s Portfolio</p>
         <ul>
           {data.map(({ id, name, type }) => (
-            <li key={id} onClick={() => openWindow(type)}>
+            <li key={id} onClick={() => openWindow(type as WindowKey)}>
               <p>{name}</p>
             </li>
           ))}

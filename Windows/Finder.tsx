@@ -9,14 +9,46 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-const WORK_LOCATION = {
+type FileType = "txt" | "url" | "img" | "fig" | "pdf";
+
+// Explicit window keys — replaces the `as any` cast
+type WindowFileKey = "txtfile" | "imgfile";
+
+type BaseItem = {
+  id: number;
+  name: string;
+  icon: string;
+  kind: "file" | "folder";
+  position?: string;
+};
+
+type FileItem = BaseItem & {
+  kind: "file";
+  fileType: FileType;
+  href?: string;
+  imageUrl?: string;
+  subtitle?: string;
+  image?: string;
+  description?: string[];
+};
+
+type FolderItem = BaseItem & {
+  kind: "folder";
+  windowPosition?: string;
+  children: Array<FileItem | FolderItem>;
+};
+
+type LocationType = FolderItem & {
+  type: string;
+};
+
+const WORK_LOCATION: LocationType = {
   id: 1,
   type: "work",
   name: "Work",
   icon: "/icons/work.svg",
   kind: "folder",
   children: [
-    // ▶ Project 1: Hybrid ATS Resume Reviewer
     {
       id: 1,
       name: "Hybrid ATS Resume Reviewer",
@@ -33,10 +65,10 @@ const WORK_LOCATION = {
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "Hybrid ATS Resume Reviewer is a smart tool that helps students optimize their resumes for on‑campus placements.",
+            "Hybrid ATS Resume Reviewer is a smart tool that helps students optimize their resumes for on-campus placements.",
             "Instead of manually comparing with job descriptions, it uses AI to analyze keyword matches and provide personalized feedback.",
             "Think of it as a career coach that highlights strengths and suggests improvements—boosting your chances of landing interviews.",
-            "Built with Next.js, FastAPI, and LangChain, it features peer‑based rankings, regex keyword matching, and GenAI feedback via Gemini, with a scalable backend on NeonDB and Prisma.",
+            "Built with Next.js, FastAPI, and LangChain, it features peer-based rankings, regex keyword matching, and GenAI feedback via Gemini, with a scalable backend on NeonDB and Prisma.",
           ],
         },
         {
@@ -283,7 +315,7 @@ const WORK_LOCATION = {
   ],
 };
 
-const ABOUT_LOCATION = {
+const ABOUT_LOCATION: LocationType = {
   id: 2,
   type: "about",
   name: "About me",
@@ -297,7 +329,7 @@ const ABOUT_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-10 left-5",
-      imageUrl: "/images/adrian.jpg",
+      imageUrl: "/images/adrian.png",
     },
     {
       id: 2,
@@ -315,7 +347,7 @@ const ABOUT_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-52 left-80",
-      imageUrl: "/images/adrian-3.jpeg",
+      imageUrl: "/images/adrian-3.jpg",
     },
     {
       id: 4,
@@ -330,13 +362,13 @@ const ABOUT_LOCATION = {
         "Hey! I'm Karanjyoti 👋, a builder at heart who loves turning ideas into real, functional web applications.",
         "I work across the stack with TypeScript, Next.js, and Python—and I'm equally comfortable training ML models or debugging database queries at 2AM.",
         "My journey started in civil engineering, but I found my groove in code—building AI tools, hackathon projects, and platforms that solve real problems.",
-        "When I'm not coding, you'll find me leading teams at hackathons, diving into generative AI papers, or convincing myself I *definitely* need that new gadget 😅",
+        "When I'm not coding, you'll find me leading teams at hackathons, diving into generative AI papers, or convincing myself I definitely need that new gadget 😅",
       ],
     },
   ],
 };
 
-const RESUME_LOCATION = {
+const RESUME_LOCATION: LocationType = {
   id: 3,
   type: "resume",
   name: "Resume",
@@ -349,13 +381,11 @@ const RESUME_LOCATION = {
       icon: "/images/pdf.png",
       kind: "file",
       fileType: "pdf",
-      // you can add `href` if you want to open a hosted resume
-      // href: "/your/resume/path.pdf",
     },
   ],
 };
 
-const TRASH_LOCATION = {
+const TRASH_LOCATION: LocationType = {
   id: 4,
   type: "trash",
   name: "Trash",
@@ -383,30 +413,52 @@ const TRASH_LOCATION = {
   ],
 };
 
-const locations = {
+const locations: Record<string, LocationType> = {
   work: WORK_LOCATION,
-  aboult: ABOUT_LOCATION,
+  about: ABOUT_LOCATION,
   resume: RESUME_LOCATION,
   trash: TRASH_LOCATION,
 };
+
+function toWindowFileKey(fileType: FileType): WindowFileKey | null {
+  const map: Partial<Record<FileType, WindowFileKey>> = {
+    txt: "txtfile",
+    img: "imgfile",
+  };
+  return map[fileType] ?? null;
+}
 
 const Finder = () => {
   const { openWindow } = useWindowStore();
   const { activeLocation, setActiveLocation } = uselocationStore();
 
-  const openItem = (item) => {
-    if (item.fileType === "pdf") return openWindow("resume");
-    if (item.kind === "folder") return setActiveLocation(item);
-    if (["fig", "url"].includes(item.fileType) && item.href)
-      return window.open(item.href, "_blank");
+  const openItem = (item: FileItem | FolderItem) => {
+    if (item.kind === "file" && item.fileType === "pdf")
+      return openWindow("resume");
 
-    openWindow(`${item.fileType}${item.kind}`, item);
+    if (item.kind === "folder") return setActiveLocation(item);
+
+    if (
+      item.kind === "file" &&
+      (item.fileType === "fig" || item.fileType === "url") &&
+      item.href
+    ) {
+      window.open(item.href, "_blank");
+      return;
+    }
+
+    if (item.kind === "file") {
+      const windowKey = toWindowFileKey(item.fileType);
+      if (windowKey) openWindow(windowKey, item);
+    }
   };
+
+  
+
   return (
     <>
       <div id="window-header">
         <WindowControl target="finder" />
-
         <Search className="icon" />
       </div>
 
@@ -419,11 +471,9 @@ const Finder = () => {
                 <li
                   key={item.id}
                   className={clsx(
-                    item.id === activeLocation.id ? "active" : "not-active",
+                    item.id === activeLocation?.id ? "active" : "not-active",
                   )}
-                  onClick={() => {
-                    setActiveLocation(item);
-                  }}
+                  onClick={() => setActiveLocation(item)}
                 >
                   <Image
                     src={item.icon}
@@ -440,37 +490,32 @@ const Finder = () => {
           <div>
             <h3>My Work</h3>
             <ul>
-              {locations.work.children.map((item) => (
-                <li
-                  key={item.id}
-                  className={clsx(
-                    item.id === activeLocation.id ? "active" : "not-active",
-                  )}
-                  onClick={() => {
-                    setActiveLocation(item);
-                  }}
-                >
-                  <Image
-                    src={item.icon}
-                    alt={item.name}
-                    width={17}
-                    height={17}
-                  />
-                  <p className="text-sm font-medium truncate">{item.name}</p>
-                </li>
-              ))}
+              {locations.work.children
+                .filter((item): item is FolderItem => item.kind === "folder")
+                .map((item) => (
+                  <li
+                    key={item.id}
+                    className={clsx(
+                      item.id === activeLocation?.id ? "active" : "not-active",
+                    )}
+                    onClick={() => setActiveLocation(item)}
+                  >
+                    <Image src={item.icon} alt={item.name} width={17} height={17} />
+                    <p className="text-sm font-medium truncate">{item.name}</p>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
 
         <ul className="content">
-          {activeLocation?.children.map((item) => (
+          {activeLocation?.children?.map((item) => (
             <li
               key={item.id}
-              className={item.position}
-              onClick={() => openItem(item)}
+              className={clsx(item.position)}
+              onClick={() =>openItem(item as FileItem | FolderItem)}
             >
-              <Image src={item.icon} alt={item.name} width={1} height={1} />
+              <Image src={item.icon} alt={item.name} width={24} height={24} />
               <p>{item.name}</p>
             </li>
           ))}

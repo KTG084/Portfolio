@@ -1,9 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 const INITIAL_Z_INDEX = 1000;
 
-const WINDOW_CONFIG = {
+type WindowKey =
+  | "finder"
+  | "contact"
+  | "resume"
+  | "safari"
+  | "photos"
+  | "terminal"
+  | "txtfile"
+  | "imgfile";
+
+type WindowState = {
+  isOpen: boolean;
+  zIndex: number;
+  data: any;
+};
+
+type Windows = Record<WindowKey, WindowState>;
+
+type Store = {
+  windows: Windows;
+  nextZIndex: number;
+  openWindow: (windowKey: WindowKey, data?: any) => void;
+  closeWindow: (windowKey: WindowKey) => void;
+  focusWindow: (windowKey: WindowKey) => void;
+};
+
+const WINDOW_CONFIG: Windows = {
   finder: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
@@ -14,7 +41,7 @@ const WINDOW_CONFIG = {
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
-const useWindowStore = create(
+const useWindowStore = create<Store>()(
   immer((set) => ({
     windows: WINDOW_CONFIG,
     nextZIndex: INITIAL_Z_INDEX + 1,
@@ -41,7 +68,7 @@ const useWindowStore = create(
         const win = state.windows[windowKey];
         win.zIndex = state.nextZIndex++;
       }),
-  })),
+  }))
 );
 
 export default useWindowStore;

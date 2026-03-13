@@ -1,7 +1,21 @@
 import useWindowStore from "@/store/window";
 import React from "react";
+type WindowKey =
+  | "finder"
+  | "contact"
+  | "resume"
+  | "safari"
+  | "photos"
+  | "terminal"
+  | "txtfile"
+  | "imgfile";
 
-const WindowControl = ({ target }) => {
+
+type WindowControlProps = {
+  target: WindowKey;
+};
+
+const WindowControl = ({ target }: WindowControlProps) => {
   const { closeWindow } = useWindowStore();
   return (
     <div id="window-controls">

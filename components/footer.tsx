@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useRef } from "react";
@@ -7,65 +8,43 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import useWindowStore from "@/store/window";
 
+type WindowKey =
+  | "finder"
+  | "contact"
+  | "resume"
+  | "safari"
+  | "photos"
+  | "terminal"
+  | "txtfile"
+  | "imgfile";
+
 type App = {
-  id: string;
+  id: WindowKey | "trash";
   name: string;
   icon: string;
   canOpen?: boolean;
 };
 
 const dockApps: App[] = [
-  {
-    id: "finder",
-    name: "Portfolio",
-    icon: "/images/finder.png",
-    canOpen: true,
-  },
-  {
-    id: "safari",
-    name: "Safari",
-    icon: "/images/safari.png",
-    canOpen: true,
-  },
-  {
-    id: "photos",
-    name: "Gallery",
-    icon: "/images/photos.png",
-    canOpen: true,
-  },
-  {
-    id: "contact",
-    name: "Contact",
-    icon: "/images/contact.png",
-    canOpen: true,
-  },
-  {
-    id: "terminal",
-    name: "Skills",
-    icon: "/images/terminal.png",
-    canOpen: true,
-  },
-  {
-    id: "trash",
-    name: "Archive",
-    icon: "/images/trash.png",
-    canOpen: false,
-  },
+  { id: "finder", name: "Portfolio", icon: "/images/finder.png", canOpen: true },
+  { id: "safari", name: "Safari", icon: "/images/safari.png", canOpen: true },
+  { id: "photos", name: "Gallery", icon: "/images/photos.png", canOpen: true },
+  { id: "contact", name: "Contact", icon: "/images/contact.png", canOpen: true },
+  { id: "terminal", name: "Skills", icon: "/images/terminal.png", canOpen: true },
+  { id: "trash", name: "Archive", icon: "/images/trash.png", canOpen: false },
 ];
 
-
 export default function Dock() {
-  const dockRef = useRef<HTMLDivElement>(null);
-  const {openWindow, closeWindow, windows} = useWindowStore();
+  const dockRef = useRef<HTMLDivElement | null>(null);
+  const { openWindow, closeWindow, windows } = useWindowStore();
 
   useGSAP(() => {
     const dock = dockRef.current;
-
     if (!dock) return;
 
-    const icons = dock.querySelectorAll(".dock-icon");
+    const icons = dock.querySelectorAll<HTMLButtonElement>(".dock-icon");
 
-    const animateIcons = (mouseX) => {
+    const animateIcons = (mouseX: number) => {
       const { left } = dock.getBoundingClientRect();
 
       icons.forEach((icon) => {
@@ -84,9 +63,8 @@ export default function Dock() {
       });
     };
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       const { left } = dock.getBoundingClientRect();
-
       animateIcons(e.clientX - left);
     };
 
@@ -97,10 +75,9 @@ export default function Dock() {
           y: 0,
           duration: 0.3,
           ease: "power1.out",
-        }),
+        })
       );
     };
-
 
     dock.addEventListener("mousemove", handleMouseMove);
     dock.addEventListener("mouseleave", resetIcons);
@@ -108,38 +85,26 @@ export default function Dock() {
     return () => {
       dock.removeEventListener("mousemove", handleMouseMove);
       dock.removeEventListener("mouseleave", resetIcons);
-    }
-
-
-
-
+    };
   }, []);
 
-  const toggleApp = (app) => {
+  const toggleApp = (app: App) => {
+    if (!app.canOpen) return;
 
-    if(!app.canOpen) return;
+    if (app.id === "trash") return;
 
-    const window = windows[app.id];
+    const windowState = windows[app.id];
 
-    if(window.isOpen) {
+    if (windowState.isOpen) {
       closeWindow(app.id);
-    }else{
+    } else {
       openWindow(app.id);
-      console.log(windows);
     }
-
-
-    
   };
 
   return (
     <section id="dock">
-      <div
-        ref={dockRef}
-        className="
-          dock-container  
-        "
-      >
+      <div ref={dockRef} className="dock-container">
         {dockApps.map(({ id, name, icon, canOpen }) => (
           <div key={id} className="relative flex justify-center">
             <button
@@ -150,7 +115,7 @@ export default function Dock() {
               data-tooltip-content={name}
               data-tooltip-delay-show={150}
               disabled={!canOpen}
-              onClick={() => toggleApp({ id, canOpen })}
+              onClick={() => toggleApp({ id, name, icon, canOpen })}
             >
               <Image
                 src={icon}

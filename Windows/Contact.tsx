@@ -10,7 +10,7 @@ const socials = [
     text: "Github",
     icon: "/icons/github.svg",
     bg: "#f4656b",
-    link: "https://github.com/JavaScript-Mastery-Pro",
+    link: "https://github.com/KTG084",
   },
   {
     id: 2,
@@ -21,17 +21,17 @@ const socials = [
   },
   {
     id: 3,
-    text: "Twitter/X",
+    text: "Instagram",
     icon: "/icons/twitter.svg",
     bg: "#ff866b",
-    link: "https://x.com/jsmasterypro",
+    link: "https://www.instagram.com/_karaaan___/?__pwa=1",
   },
   {
     id: 4,
     text: "LinkedIn",
     icon: "/icons/linkedin.svg",
     bg: "#05b6f6",
-    link: "https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all",
+    link: "https://www.linkedin.com/in/karanjyoti-medhi-204822290/",
   },
 ];
 
@@ -45,7 +45,7 @@ const Contact = () => {
 
       <div className="p-5 space-y-4 bg-white text-center">
         <Image
-          src="/images/adrian.jpg"
+          src="/images/adrian.png"
           alt="Karan"
           width={160}
           height={160}

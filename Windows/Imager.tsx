@@ -39,4 +39,4 @@ const Imager = () => {
 
 const ImageWindow = WindowWrapper(Imager, "imgfile");
 
-export default Imager;
+export default ImageWindow;

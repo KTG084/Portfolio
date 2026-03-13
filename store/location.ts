@@ -1,22 +1,49 @@
-import { stat } from "fs";
+import { CSSProperties } from "react";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-const WORK_LOCATION = {
+type FileType = "txt" | "url" | "img" | "fig" | "pdf";
+
+type LocationItem = {
+  id: number;
+  name: string;
+  icon: string;
+  kind: "folder" | "file";
+  fileType?: FileType;
+  href?: string;
+  position?: string | CSSProperties;
+  windowPosition?: string;
+  imageUrl?: string;
+  subtitle?: string;
+  image?: string;
+  description?: string[];
+  children?: LocationItem[];
+};
+
+type LocationRoot = LocationItem & {
+  type: string;
+};
+
+type LocationState = {
+  activeLocation: LocationItem;
+  setActiveLocation: (location?: LocationItem | null) => void;
+  resetActiveLocation: () => void;
+};
+
+const WORK_LOCATION: LocationRoot = {
   id: 1,
   type: "work",
   name: "Work",
   icon: "/icons/work.svg",
   kind: "folder",
   children: [
-    // ▶ Project 1
     {
       id: 5,
       name: "Nike Ecommerce Website Application",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-5", // icon position inside Finder
-      windowPosition: "top-[5vh] left-5", // optional: Finder window position
+      position: "top-10 left-5",
+      windowPosition: "top-[5vh] left-5",
       children: [
         {
           id: 1,
@@ -61,116 +88,10 @@ const WORK_LOCATION = {
         },
       ],
     },
-
-    // ▶ Project 2
-    {
-      id: 6,
-      name: "AI Resume Analyzer",
-      icon: "/images/folder.png",
-      kind: "folder",
-      position: "top-52 right-80",
-      windowPosition: "top-[20vh] left-7",
-      children: [
-        {
-          id: 1,
-          name: "AI Resume Analyzer Project.txt",
-          icon: "/images/txt.png",
-          kind: "file",
-          fileType: "txt",
-          position: "top-5 right-10",
-          description: [
-            "AI Resume Analyzer is a smart tool that helps you perfect your resume with instant feedback.",
-            "Instead of guessing what recruiters want, you get AI-powered insights on keywords, formatting, and overall impact.",
-            "Think of it like having a career coach—pointing out strengths, fixing weaknesses, and boosting your chances of landing interviews.",
-            "It's built with Next.js and Tailwind, so it runs fast, looks professional, and works seamlessly on any device.",
-          ],
-        },
-        {
-          id: 2,
-          name: "ai-resume-analyzer.com",
-          icon: "/images/safari.png",
-          kind: "file",
-          fileType: "url",
-          href: "https://youtu.be/iYOz165wGkQ?si=R1hs8Legl200m0Cl",
-          position: "top-20 left-20",
-        },
-        {
-          id: 4,
-          name: "ai-resume-analyzer.png",
-          icon: "/images/image.png",
-          kind: "file",
-          fileType: "img",
-          position: "top-52 left-80",
-          imageUrl: "/images/project-2.png",
-        },
-        {
-          id: 5,
-          name: "Design.fig",
-          icon: "/images/plain.png",
-          kind: "file",
-          fileType: "fig",
-          href: "https://google.com",
-          position: "top-60 left-5",
-        },
-      ],
-    },
-
-    // ▶ Project 3
-    {
-      id: 7,
-      name: "Food Delivery App",
-      icon: "/images/folder.png",
-      kind: "folder",
-      position: "top-10 left-80",
-      windowPosition: "top-[33vh] left-7",
-      children: [
-        {
-          id: 1,
-          name: "Food Delivery App Project.txt",
-          icon: "/images/txt.png",
-          kind: "file",
-          fileType: "txt",
-          position: "top-5 left-10",
-          description: [
-            "Our Food Delivery App is a fast and convenient way to order meals from your favorite restaurants.",
-            "Instead of making calls or waiting in line, you can browse menus, customize orders, and track deliveries in real time.",
-            "Think of it like having your favorite restaurants in your pocket—ready to deliver anytime, anywhere.",
-            "It’s built with React Native, so it works smoothly on both iOS and Android with a clean, modern design.",
-          ],
-        },
-        {
-          id: 2,
-          name: "food-delivery-app.com",
-          icon: "/images/safari.png",
-          kind: "file",
-          fileType: "url",
-          href: "https://youtu.be/LKrX390fJMw?si=cExkuVhf2DTV9G2-",
-          position: "top-10 right-20",
-        },
-        {
-          id: 4,
-          name: "food-delivery-app.png",
-          icon: "/images/image.png",
-          kind: "file",
-          fileType: "img",
-          position: "top-52 right-80",
-          imageUrl: "/images/project-3.png",
-        },
-        {
-          id: 5,
-          name: "Design.fig",
-          icon: "/images/plain.png",
-          kind: "file",
-          fileType: "fig",
-          href: "https://google.com",
-          position: "top-60 right-20",
-        },
-      ],
-    },
   ],
 };
 
-const ABOUT_LOCATION = {
+const ABOUT_LOCATION: LocationRoot = {
   id: 2,
   type: "about",
   name: "About me",
@@ -223,7 +144,7 @@ const ABOUT_LOCATION = {
   ],
 };
 
-const RESUME_LOCATION = {
+const RESUME_LOCATION: LocationRoot = {
   id: 3,
   type: "resume",
   name: "Resume",
@@ -236,13 +157,11 @@ const RESUME_LOCATION = {
       icon: "/images/pdf.png",
       kind: "file",
       fileType: "pdf",
-      // you can add `href` if you want to open a hosted resume
-      // href: "/your/resume/path.pdf",
     },
   ],
 };
 
-const TRASH_LOCATION = {
+const TRASH_LOCATION: LocationRoot = {
   id: 4,
   type: "trash",
   name: "Trash",
@@ -277,23 +196,20 @@ const locations = {
   trash: TRASH_LOCATION,
 };
 
-const DEFAULT_LOCATIONS = locations.work;
+const DEFAULT_LOCATIONS: LocationItem = locations.work;
 
-const uselocationStore = create(
+const uselocationStore = create<LocationState>()(
   immer((set) => ({
     activeLocation: DEFAULT_LOCATIONS,
 
     setActiveLocation: (location = null) =>
       set((state) => {
-
-        
-        state.activeLocation = location;
-        if(location === undefined) return;
+        if (location === undefined || location === null) return;
         state.activeLocation = location;
       }),
 
     resetActiveLocation: () =>
-      set((state) => { 
+      set((state) => {
         state.activeLocation = DEFAULT_LOCATIONS;
       }),
   })),
