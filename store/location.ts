@@ -105,7 +105,7 @@ const ABOUT_LOCATION: LocationRoot = {
       kind: "file",
       fileType: "img",
       position: "top-10 left-5",
-      imageUrl: "/images/adrian.jpg",
+      imageUrl: "/images/adrian.png",
     },
     {
       id: 2,

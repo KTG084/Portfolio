@@ -77,7 +77,7 @@ const WORK_LOCATION: LocationType = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "#",
+          href: "https://mainer-opal.vercel.app/",
           position: "top-10 right-20",
         },
         {
@@ -87,7 +87,7 @@ const WORK_LOCATION: LocationType = {
           kind: "file",
           fileType: "img",
           position: "top-52 right-80",
-          imageUrl: "/images/project-1.png",
+          imageUrl: "/images/use1.png",
         },
         {
           id: 4,
@@ -130,7 +130,7 @@ const WORK_LOCATION: LocationType = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "#",
+          href: "https://authentication-nexr-js.vercel.app/",
           position: "top-20 left-20",
         },
         {
@@ -140,7 +140,7 @@ const WORK_LOCATION: LocationType = {
           kind: "file",
           fileType: "img",
           position: "top-52 left-80",
-          imageUrl: "/images/project-2.png",
+          imageUrl: "/images/use2.png",
         },
         {
           id: 4,
@@ -183,7 +183,7 @@ const WORK_LOCATION: LocationType = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "#",
+          href: "https://github.com/KTG084/multimodalRAG",
           position: "top-10 right-20",
         },
         {
@@ -193,7 +193,7 @@ const WORK_LOCATION: LocationType = {
           kind: "file",
           fileType: "img",
           position: "top-52 right-80",
-          imageUrl: "/images/project-3.png",
+          imageUrl: "/images/use3.png",
         },
         {
           id: 4,
@@ -289,7 +289,7 @@ const WORK_LOCATION: LocationType = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "#",
+          href: "https://3wproject.vercel.app/",
           position: "top-20 left-20",
         },
         {
@@ -299,7 +299,7 @@ const WORK_LOCATION: LocationType = {
           kind: "file",
           fileType: "img",
           position: "top-52 left-80",
-          imageUrl: "/images/project-5.png",
+          imageUrl: "/images/use5.png",
         },
         {
           id: 4,
