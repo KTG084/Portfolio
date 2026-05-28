@@ -4,13 +4,13 @@ type WindowKey =
   | "finder"
   | "contact"
   | "resume"
+  | "resumeDA"
   | "safari"
   | "photos"
   | "terminal"
   | "txtfile"
   | "imgfile";
-
-
+  
 type WindowControlProps = {
   target: WindowKey;
 };

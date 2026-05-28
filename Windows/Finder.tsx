@@ -371,17 +371,17 @@ const ABOUT_LOCATION: LocationType = {
 const RESUME_LOCATION: LocationType = {
   id: 3,
   type: "resume",
-  name: "Resume",
+  name: "Resumes",
   icon: "/icons/file.svg",
   kind: "folder",
   children: [
     {
       id: 1,
-      name: "Resume.pdf",
+      name: "ResumeSDE.pdf",
       icon: "/images/pdf.png",
       kind: "file",
       fileType: "pdf",
-    },
+    }
   ],
 };
 

@@ -8,6 +8,7 @@ type WindowKey =
   | "finder"
   | "contact"
   | "resume"
+  | "resumeDA"
   | "safari"
   | "photos"
   | "terminal"
@@ -34,6 +35,7 @@ const WINDOW_CONFIG: Windows = {
   finder: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  resumeDA: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },

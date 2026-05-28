@@ -3,6 +3,7 @@ import TextType from "@/components/TextType";
 import Safari from "@/Windows/Safari";
 import Terminal from "@/Windows/Terminal";
 import Resume from "@/Windows/Resume";
+import ResumeDA from "@/Windows/ResumeDA";
 import Finder from "@/Windows/Finder";
 import Text from "@/Windows/Text";
 import Imager from "@/Windows/Imager";
@@ -49,6 +50,7 @@ const page = () => {
       <Terminal />
       <Safari />
       <Resume />
+      <ResumeDA/>
       <Finder />
       <Text />
       <Imager />

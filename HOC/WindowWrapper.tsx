@@ -7,6 +7,7 @@ type WindowKey =
   | "finder"
   | "contact"
   | "resume"
+  | "resumeDA"
   | "safari"
   | "photos"
   | "terminal"

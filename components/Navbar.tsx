@@ -20,6 +20,11 @@ const data = [
     name: "Resume",
     type: "resume",
   },
+  {
+    id: 5,
+    name: "Resume Data Analyst",
+    type: "resumeDA",
+  },
 ];
 
 const navIcons = [
@@ -45,6 +50,7 @@ type WindowKey =
   | "finder"
   | "contact"
   | "resume"
+  | "resumeDA"
   | "safari"
   | "photos"
   | "terminal"
