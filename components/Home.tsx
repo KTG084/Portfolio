@@ -57,7 +57,7 @@ children: [
     name: "Hybrid ATS Resume Reviewer",
     icon: "/images/folder.png",
     kind: "folder",
-    position: { top: "2rem", right: "100rem" },
+    position: { top: "20rem", right: "100rem" },
     windowPosition: "top-[5vh] left-5",
     children: [
       {
@@ -101,7 +101,7 @@ children: [
     name: "Media Upload Platform",
     icon: "/images/folder.png",
     kind: "folder",
-    position: { top: "9rem", right: "80rem" },
+    position: { top: "25rem", right: "80rem" },
     windowPosition: "top-[20vh] left-7",
     children: [
       {
@@ -145,7 +145,7 @@ children: [
     name: "Multimodal RAG Chatbot",
     icon: "/images/folder.png",
     kind: "folder",
-    position: { top: "16rem", right: "50rem" },
+    position: { top: "16rem", right: "80rem" },
     windowPosition: "top-[33vh] left-7",
     children: [
       {
@@ -189,7 +189,7 @@ children: [
     name: "Retail Demand Analysis",
     icon: "/images/folder.png",
     kind: "folder",
-    position: { top: "2rem", right: "70rem" },
+    position: { top: "2rem", left: "80rem" },
     windowPosition: "top-[45vh] left-5",
     children: [
       {
@@ -241,7 +241,7 @@ children: [
     name: "Gamified Leaderboard",
     icon: "/images/folder.png",
     kind: "folder",
-    position: { top: "9rem", right: "8rem" },
+    position: { top: "10rem", right: "100rem" },
     windowPosition: "top-[58vh] left-7",
     children: [
       {
@@ -287,6 +287,179 @@ children: [
       },
     ],
   },
+
+  {
+  id: 6,
+  name: "Advanced SQL Data Warehouse",
+  icon: "/images/folder.png",
+  kind: "folder",
+  position: { top: "9rem", left: "80rem" },
+  windowPosition: "top-[60vh] left-12",
+  children: [
+    {
+      id: 1,
+      name: "Project Overview.txt",
+      icon: "/images/txt.png",
+      kind: "file",
+      fileType: "txt",
+      position: "top-5 right-10",
+      description: [
+        "Advanced SQL Data Warehouse is an enterprise-grade analytics platform built using PostgreSQL and modern ETL architecture.",
+        "Designed a complete Bronze, Silver, and Gold layer data warehouse to transform raw ERP and CRM datasets into reliable business-ready insights.",
+        "Implemented optimized Star Schema models with fact and dimension tables, enabling fast analytical queries and scalable reporting.",
+        "Developed advanced SQL analytics including customer segmentation, cohort analysis, customer lifetime value, and product performance dashboards, reducing reporting complexity and improving query performance for large datasets.",
+      ],
+    },
+    {
+      id: 2,
+      name: "GitHub Repository",
+      icon: "/images/safari.png",
+      kind: "file",
+      fileType: "url",
+      href: "https://github.com/KTG084/SQL-Datawarehouse",
+      position: "top-20 left-20",
+    },
+    {
+      id: 3,
+      name: "warehouse-schema.png",
+      icon: "/images/image.png",
+      kind: "file",
+      fileType: "img",
+      position: "top-52 left-80",
+      imageUrl: "/images/imageDA1.png",
+    },
+  ],
+},
+
+
+{
+  id: 7,
+  name: "Swiggy Sales Analysis",
+  icon: "/images/folder.png",
+  kind: "folder",
+  position: { top: "9rem", left: "90rem" },
+  windowPosition: "top-[55vh] left-16",
+  children: [
+    {
+      id: 1,
+      name: "Project Overview.txt",
+      icon: "/images/txt.png",
+      kind: "file",
+      fileType: "txt",
+      position: "top-5 right-10",
+      description: [
+        "Swiggy Sales Analysis is an end-to-end business intelligence project that transforms raw food delivery data into actionable business insights.",
+        "Analyzed over 600,000+ orders across 10 major Indian cities by building scalable ETL pipelines and integrating data into a PostgreSQL data warehouse.",
+        "Performed advanced exploratory data analysis (EDA) using Python to identify customer behavior, ordering trends, revenue drivers, and regional performance.",
+        "Designed a 7-page interactive Power BI dashboard with star schema modeling, enabling customer retention analysis, revenue optimization, city-wise performance tracking, and executive-level decision making.",
+      ],
+    },
+    {
+      id: 2,
+      name: "GitHub Repository",
+      icon: "/images/safari.png",
+      kind: "file",
+      fileType: "url",
+      href: "https://github.com/KTG084/Swiggy-Sales-Analysis",
+      position: "top-20 left-20",
+    },
+    {
+      id: 3,
+      name: "PowerBI-Dashboard.png",
+      icon: "/images/image.png",
+      kind: "file",
+      fileType: "img",
+      position: "top-52 left-80",
+      imageUrl: "/images/imageDA2.png",
+    },
+  ],
+},
+
+{
+  id: 8,
+  name: "Credit Card Transaction Analysis",
+  icon: "/images/folder.png",
+  kind: "folder",
+  position: { top: "17rem", left: "90rem" },
+  windowPosition: "top-[58vh] left-10",
+  children: [
+    {
+      id: 1,
+      name: "Project Overview.txt",
+      icon: "/images/txt.png",
+      kind: "file",
+      fileType: "txt",
+      position: "top-5 right-10",
+      description: [
+        "Credit Card Transaction Analysis is an interactive business intelligence solution designed to uncover customer spending behavior and transaction trends.",
+        "Built a scalable Power BI dashboard integrated with SQL datasets to analyze thousands of credit card transactions across customer demographics and card categories.",
+        "Implemented advanced DAX measures and Power Query transformations to calculate real-time KPIs, revenue, transaction volume, customer acquisition, and spending insights.",
+        "Developed drill-through dashboards with dynamic filtering, enabling detailed analysis of card-type performance, customer segments, monthly trends, and revenue optimization for business decision-making.",
+      ],
+    },
+    {
+      id: 2,
+      name: "GitHub Repository",
+      icon: "/images/safari.png",
+      kind: "file",
+      fileType: "url",
+      href: "https://github.com/KTG084/Credit-Card-Report",
+      position: "top-20 left-20",
+    },
+    {
+      id: 3,
+      name: "CreditCard-Dashboard.png",
+      icon: "/images/image.png",
+      kind: "file",
+      fileType: "img",
+      position: "top-52 left-80",
+      imageUrl: "/images/imageDA3.png",
+    },
+  ],
+},
+
+{
+  id: 8,
+  name: "Blinkit Grocery Sales Analysis",
+  icon: "/images/folder.png",
+  kind: "folder",
+  position: { top: "17rem", left: "100rem" },
+  windowPosition: "top-[60vh] left-12",
+  children: [
+    {
+      id: 1,
+      name: "Project Overview.txt",
+      icon: "/images/txt.png",
+      kind: "file",
+      fileType: "txt",
+      position: "top-5 right-10",
+      description: [
+        "Blinkit Grocery Sales Analysis is an interactive business intelligence dashboard built entirely in Microsoft Excel.",
+        "Developed a KPI-driven dashboard using Pivot Tables, Pivot Charts, Power Query, and dynamic slicers to analyze grocery sales performance across multiple outlets.",
+        "Performed outlet-wise sales analysis, item category segmentation, fat-content distribution, and customer rating trends to uncover key business insights.",
+        "Designed an executive-friendly dashboard that enables quick decision-making by tracking revenue, sales distribution, outlet performance, and product-level metrics through fully interactive visualizations.",
+      ],
+    },
+    {
+      id: 2,
+      name: "GitHub Repository",
+      icon: "/images/safari.png",
+      kind: "file",
+      fileType: "url",
+      href: "https://github.com/KTG084/Blinkit-Grocery-Sales-Analysis",
+      position: "top-20 left-20",
+    },
+    {
+      id: 3,
+      name: "Excel Dashboard.png",
+      icon: "/images/image.png",
+      kind: "file",
+      fileType: "img",
+      position: "top-52 left-80",
+      imageUrl: "/images/imageDA3.png",
+    },
+  ],
+},
 ]
 };
 

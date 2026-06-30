@@ -6,8 +6,14 @@ import { Check } from "lucide-react";
 
 const techStack = [
   {
-    category: "Programming Languages",
-    items: ["Python", "C", "C++", "C#", "Java", "JavaScript", "TypeScript"],
+    category: "Languages",
+    items: [
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "SQL",
+      "C++",
+    ],
   },
   {
     category: "Frontend",
@@ -15,11 +21,7 @@ const techStack = [
       "React",
       "Next.js",
       "Tailwind CSS",
-      "shadcn/ui",
-      "Radix UI",
-      "WebSockets",
-      "WebRTC",
-      "Responsive Design",
+      "Zustand",
     ],
   },
   {
@@ -27,12 +29,9 @@ const techStack = [
     items: [
       "Node.js",
       "Express.js",
-      "NestJS",
-      "Hono",
+      "FastAPI",
       "REST APIs",
-      "JWT Authentication",
-      "OAuth",
-      "Razorpay Integration",
+      "NextAuth",
     ],
   },
   {
@@ -40,49 +39,38 @@ const techStack = [
     items: [
       "PostgreSQL",
       "MongoDB",
-      "NeonDB",
       "Redis",
-      "Prisma",
-      "DB Optimization",
+      "Prisma ORM",
     ],
   },
   {
-    category: "AI / Machine Learning",
+    category: "Data Analytics",
+    items: [
+      "Power BI",
+      "Excel",
+      "DAX",
+      "Power Query",
+      "ETL",
+      "Data Modeling",
+    ],
+  },
+  {
+    category: "Machine Learning",
     items: [
       "Pandas",
       "NumPy",
-      "Matplotlib",
-      "Seaborn",
-      "Regression",
-      "Supervised Learning",
-      "Unsupervised Learning",
-      "Regular Expressions (Regex)",
+      "Scikit-learn",
+      "XGBoost",
       "LangChain",
-      "LangGraph",
-      "LangServe",
     ],
   },
   {
-    category: "Tools & Platforms",
+    category: "Tools",
     items: [
       "Git",
       "GitHub",
       "Docker",
       "Postman",
-      "MongoDB Compass",
-      "Jupyter Notebook",
-      "ImageKit",
-      "Inngest",
-    ],
-  },
-  {
-    category: "Soft Skills",
-    items: [
-      "Leadership",
-      "Teamwork",
-      "Public Speaking",
-      "Writing",
-      "Event Management",
     ],
   },
 ];

@@ -36,7 +36,7 @@ const page = () => {
           minFontSize={40}
         />
         <TextType
-          text={["I am Karan,", "This is my Portfolio.", "Happy coding!"]}
+          text={["I am Karan,", "This is my Portfolio.", "Happy coding!", "This portfolio is like mac OS, Explore and have fun"]}
           typingSpeed={75}
           pauseDuration={1500}
           showCursor
