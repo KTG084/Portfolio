@@ -13,6 +13,10 @@ import Home from "@/components/Home";
 const page = () => {
   return (
     <div style={{ position: "relative", width: "100vw", height: "100vh", overflow: "hidden" }}>
+      
+      
+    
+      
       <div
         style={{
           position: "absolute",
@@ -23,24 +27,24 @@ const page = () => {
           textAlign: "center",
         }}
       >
-        <TextPressure
+        <TextPressure 
           text="Hello!"
           flex
           alpha={false}
           stroke={false}
-          width
-          weight
+          width = {true}
+          weight = {false}
           italic
           textColor="#ffffff"
           strokeColor="#5227FF"
           minFontSize={40}
         />
         <TextType
-          text={["I am Karan,", "This is my Portfolio.", "Happy coding!", "This portfolio is like mac OS, Explore and have fun"]}
+          text={["I am Karan,", "This is my Portfolio.", "Happy coding!", "This portfolio is like mac OS,", "Explore and have fun"]}
           typingSpeed={75}
           pauseDuration={1500}
           showCursor
-          cursorCharacter="|"
+          cursorCharacter="_"
           deletingSpeed={50}
           cursorBlinkDuration={0.5}
           className="text-type--hero"

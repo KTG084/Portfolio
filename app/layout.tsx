@@ -32,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${georama.variable} ${robotoMono.variable} antialiased`}
       >
+        
         <Navbar />
         {children}
         <Footer/>

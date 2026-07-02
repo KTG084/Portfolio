@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"
+"use client";
 import React from "react";
 import dayjs from "dayjs";
 import useWindowStore from "@/store/window";
@@ -57,11 +57,21 @@ type WindowKey =
   | "txtfile"
   | "imgfile";
 const Navbar = () => {
-  const { openWindow  } = useWindowStore();
+  const { openWindow } = useWindowStore();
   return (
-    <nav>
+    <nav
+      className="bg-white/10
+backdrop-blur-xl
+border-b border-white/15
+shadow-lg
+shadow-black/20 text-white"
+    >
       <div>
-        <img src="/images/logo.svg" alt="logo" />
+        <img
+  src="/images/logo.svg"
+  alt="logo"
+  className="w-5 h-5 brightness-0 invert"
+/>
         <p className="font-bold">Karan&apos;s Portfolio</p>
         <ul>
           {data.map(({ id, name, type }) => (
@@ -76,12 +86,14 @@ const Navbar = () => {
         <ul>
           {navIcons.map(({ id, img }) => (
             <li key={id}>
-              <img src={img} className="icon-hover" alt={`icon-${id}`} />
+              <img src={img} className="icon-hover brightness-0 invert" alt={`icon-${id}`} />
             </li>
           ))}
         </ul>
 
-        <time>{dayjs().format("ddd MMM D HH:mm")}</time>
+        <time className="text-white">
+  {dayjs().format("ddd MMM D HH:mm")}
+</time>
       </div>
     </nav>
   );
